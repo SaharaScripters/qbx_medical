@@ -16,7 +16,8 @@ end
 ---@param ped number
 local function makePedFall(ped)
     ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
-    SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    local forward = GetEntityForwardVector(ped)
+    SetPedToRagdollWithFall(ped, 1500, 2000, 1, forward.x, forward.y, forward.z, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 end
 
 ---makes player fall based on random number determined by leg injuries. Difference chance while player is walking vs running.
@@ -48,7 +49,7 @@ end
 ---enforce following arm disabilities on the player for a set time period:
 ---Disable left turns in vehicles; disable weapon firing for left arm injuries, and weapon aiming for right arm injuries.
 ---@param ped number the player's ped
----@param leftArmDamaged boolean true if the player's left arm is damaged, false if the right arm is damaged. 
+---@param leftArmDamaged boolean true if the player's left arm is damaged, false if the right arm is damaged.
 local function disableArms(ped, leftArmDamaged)
     local disableTimer = 15
     while disableTimer > 0 do
@@ -89,7 +90,7 @@ local function playBrainDamageEffectAndRagdoll(ped)
 
     if not IsPedRagdoll(ped) and IsPedOnFoot(ped) and not IsPedSwimming(ped) then
         ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
-        SetPedToRagdoll(ped, 5000, 1, 2)
+        SetPedToRagdoll(ped, 5000, 1, 2, false, false, false)
     end
 
     Wait(5000)

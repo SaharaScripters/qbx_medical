@@ -15,7 +15,7 @@ function ResurrectPlayer()
     local pos = GetEntityCoords(cache.ped)
     local heading = GetEntityHeading(cache.ped)
 
-    NetworkResurrectLocalPlayer(pos.x, pos.y, pos.z + 0.5, heading, true, false)
+    NetworkResurrectLocalPlayer(pos.x, pos.y, pos.z + 0.5, heading, 1, false)
     if cache.vehicle then
         SetPedIntoVehicle(cache.ped, cache.vehicle, cache.seat)
     end

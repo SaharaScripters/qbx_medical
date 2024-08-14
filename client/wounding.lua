@@ -36,7 +36,8 @@ local function makePlayerBlackout()
 
     if not IsPedRagdoll(cache.ped) and IsPedOnFoot(cache.ped) and not IsPedSwimming(cache.ped) then
         ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
-        SetPedToRagdollWithFall(cache.ped, 7500, 9000, 1, GetEntityForwardVector(cache.ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        local forward = GetEntityForwardVector(cache.ped)
+        SetPedToRagdollWithFall(cache.ped, 7500, 9000, 1, forward.x, forward.y, forward.z, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     end
 
     Wait(1500)
